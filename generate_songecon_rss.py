@@ -21,11 +21,9 @@ PROGRAMS = [
 
 BASE_URL = "https://podcastfile.imbc.com/cgi-bin/podcast.fcgi/podcast/economy/{code}_{yyyymmdd}.mp3"
 
-def exists(url: str, timeout=15) -> bool:
+def exists(url, timeout=15):
     try:
-        r = requests.head(url, timeout=timeout, allow_redirects=True)
-        if r.status_code in (403, 405):  # HEAD 제한시 GET 시도
-            r = requests.get(url, timeout=timeout, stream=True)
+        r = requests.get(url, timeout=timeout, stream=True)
         if not r.ok:
             return False
         size = int(r.headers.get("Content-Length", "0"))
