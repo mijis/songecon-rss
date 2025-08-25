@@ -2,8 +2,7 @@ name: Build & Deploy RSS (Pages)
 
 on:
   schedule:
-    # 서울 07:05 = UTC 22:05(전날), 평일만 실행
-    - cron: "5 22 * * 1-5"
+    - cron: "0 1 * * 1-5"   # UTC 01:00 = KST 10:00
   workflow_dispatch:
   push:
     branches: [ main ]
