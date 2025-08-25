@@ -25,10 +25,19 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -r requirements.txt
+
       - name: Generate RSS
         env:
           DAYS: "10"
         run: python generate_songecon_rss.py
+        
+      - name: Debug public contents
+        run: |
+          echo "== ls public =="
+          ls -l public || echo "public folder not found"
+          echo "== head of rss =="
+          head -n 20 public/rss_songecon.xml || echo "rss_songecon.xml not found"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
